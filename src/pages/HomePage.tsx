@@ -119,7 +119,7 @@ export default function HomePage() {
           className="absolute inset-0"
         >
           <img
-            src="/src/assets/images/hero_first_screen_bg_1794574757101.jpg"
+            src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/src/assets/images/hero_first_screen_bg_1794574757101.jpg`}
             alt=""
             referrerPolicy="no-referrer"
             className="w-full h-full object-cover object-center"
