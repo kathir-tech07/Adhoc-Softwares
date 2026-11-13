@@ -11,9 +11,8 @@ import {
 import { MapPin, ExternalLink } from 'lucide-react';
 import { COMPANY_INFO } from '../data/company';
 
-const DEFAULT_COIMBATORE_CENTER = { lat: 11.0785, lng: 77.0016 };
-const DIRECTIONS_URL =
-  'https://www.google.com/maps/search/?api=1&query=Adhoc+Softwares+Saravanampatti+Coimbatore+641035';
+const DEFAULT_COIMBATORE_CENTER = { lat: 11.0642358, lng: 77.0018165 };
+const DIRECTIONS_URL = 'https://maps.app.goo.gl/r2m3dAh6mDoTmtJEA';
 
 function OfficeMarkerLayer({
   onLocationResolved,
@@ -99,28 +98,35 @@ export default function CoimbatoreOfficeMap() {
 
   if (!apiKey || mapError) {
     return (
-      <div className="h-[360px] lg:h-full min-h-[360px] w-full rounded-xl bg-[#081426] text-white p-6 flex flex-col justify-between border border-slate-800">
-        <div className="flex items-start justify-between gap-4">
-          <div className="w-11 h-11 rounded-lg bg-[#3478F6]/20 border border-[#3478F6]/40 flex items-center justify-center">
-            <MapPin className="w-5 h-5 text-[#21C8E5]" aria-hidden="true" />
+      <div className="relative h-[360px] lg:h-full min-h-[360px] w-full rounded-xl overflow-hidden border border-slate-800 bg-[#081426] shadow-lg">
+        <iframe
+          title="Adhoc Softwares Location Map"
+          src="https://maps.google.com/maps?q=11.0642358,77.0018165&hl=en&z=17&output=embed"
+          className="w-full h-full min-h-[360px] border-0"
+          loading="lazy"
+          allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+        <div className="absolute bottom-3 left-3 right-3 sm:right-auto bg-[#081426]/90 backdrop-blur-md p-3 rounded-lg border border-slate-700/60 shadow-md flex items-center justify-between gap-3 text-white">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-md bg-[#3478F6]/20 border border-[#3478F6]/40 flex items-center justify-center shrink-0">
+              <MapPin className="w-4 h-4 text-[#21C8E5]" aria-hidden="true" />
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-white">Adhoc Softwares</p>
+              <p className="text-[11px] text-slate-300">Saravanampatti, Coimbatore · 641035</p>
+            </div>
           </div>
-          <span className="text-xs font-mono text-slate-400">Coimbatore · 641035</span>
+          <a
+            href={DIRECTIONS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#3478F6] hover:bg-[#2563EB] text-white text-xs font-medium transition-colors shrink-0"
+          >
+            <span>Open Maps</span>
+            <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+          </a>
         </div>
-
-        <div className="space-y-2">
-          <p className="text-base font-semibold text-white">Adhoc Softwares Headquarters</p>
-          <p className="text-sm text-slate-300 leading-relaxed">{COMPANY_INFO.address.full}</p>
-        </div>
-
-        <a
-          href={DIRECTIONS_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#3478F6] hover:bg-[#2563EB] text-white text-sm font-semibold transition-colors w-full sm:w-auto"
-        >
-          <span>View Location on Google Maps</span>
-          <ExternalLink className="w-4 h-4" aria-hidden="true" />
-        </a>
       </div>
     );
   }
